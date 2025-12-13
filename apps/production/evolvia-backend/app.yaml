@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: evolvia-backend-prod
+  namespace: argocd # ArgoCD Application CRD is here
+spec:
+  project: cloudmentor
+  source:
+    repoURL: https://github.com/cloudsteak/cm-companion
+    targetRevision: main
+    path: apps/production/evolvia-backend/components
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd # Child Application CRDs will also be in the argocd namespace
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
