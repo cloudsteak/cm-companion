@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1" # Először a namespace!
 spec:
-  project: default
+  project: cloudmentor
   source:
     repoURL: https://github.com/cloudsteak/cm-companion
     targetRevision: main

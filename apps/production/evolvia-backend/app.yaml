@@ -4,7 +4,7 @@ metadata:
   name: evolvia-backend-prod
   namespace: argocd # ArgoCD Application CRD is here
 spec:
-  project: default
+  project: cloudmentor
   source:
     repoURL: https://github.com/cloudsteak/cm-companion
     targetRevision: main
