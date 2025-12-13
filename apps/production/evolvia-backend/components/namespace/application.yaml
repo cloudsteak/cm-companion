@@ -4,7 +4,11 @@ metadata:
   name: evolvia-backend-namespace-prod
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-1" # Először a namespace!
+    argocd.argoproj.io/sync-wave: "-1" # Namespace should be created first
+  labels:
+    environment: production
+    app: evolvia-backend
+    type: namespace
 spec:
   project: cloudmentor
   source:
