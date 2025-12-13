@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: evolvia-backend-prod
   namespace: argocd # ArgoCD Application CRD is here
+  labels:
+    environment: production
+    app: evolvia-backend
+    type: application-root
 spec:
   project: cloudmentor
   source:

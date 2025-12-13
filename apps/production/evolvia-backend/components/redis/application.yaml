@@ -5,6 +5,10 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+  labels:
+    environment: production
+    app: evolvia-backend
+    type: redis
 spec:
   project: cloudmentor
   sources:

@@ -4,3 +4,6 @@ metadata:
   name: evolvia-backend-prod
   labels:
     istio-injection: enabled
+    environment: production
+    app: evolvia-backend
+    type: namespace
