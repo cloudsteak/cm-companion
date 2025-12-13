@@ -8,7 +8,7 @@ resources:
     cpu: "5m"
     memory: "5Mi"
   limits:
-    cpu: "256m"
+    cpu: "250m"
     memory: "256Mi"
 
 persistence:
