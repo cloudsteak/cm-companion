@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: evolvia-backend-redis-prod
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  sources:
+    - repoURL: ghcr.io/cloudsteak/charts
+      chart: redis
+      targetRevision: 0.1.1
+      helm:
+        valueFiles:
+          - $values/apps/production/evolvia-backend/components/redis/values.yaml
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: evolvia-backend-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
