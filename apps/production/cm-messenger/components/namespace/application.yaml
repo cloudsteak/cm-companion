@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cm-messenger-namespace
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  source:
+    repoURL: https://github.com/cloudsteak/cm-companion
+    targetRevision: main
+    path: apps/production/cm-messenger/components/namespace/manifests
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
