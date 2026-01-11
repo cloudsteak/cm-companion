@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cm-messenger-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cm-messenger
+
+  sources:
+    - repoURL: oci://ghcr.io/cloudsteak/charts
+      chart: cm-messenger
+      targetRevision: 0.0.1
+      helm:
+        valueFiles:
+          - $values/apps/production/cm-messenger/components/messenger/values.yaml
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
