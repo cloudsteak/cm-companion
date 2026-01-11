@@ -4,9 +4,9 @@ metadata:
   name: cm-messenger-namespace
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
-  project: default
+  project: cloudmentor
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
