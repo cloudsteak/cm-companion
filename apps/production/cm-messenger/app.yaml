@@ -4,7 +4,7 @@ metadata:
   name: cm-messenger
   namespace: argocd
 spec:
-  project: default
+  project: cloudmentor
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
