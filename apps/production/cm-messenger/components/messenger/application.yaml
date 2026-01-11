@@ -12,7 +12,7 @@ spec:
     namespace: cm-messenger-prod
 
   sources:
-    - repoURL: oci://ghcr.io/cloudsteak/charts
+    - repoURL: ghcr.io/cloudsteak/charts
       chart: cm-messenger
       targetRevision: 0.1.1
       helm:
