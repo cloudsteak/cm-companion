@@ -3,7 +3,7 @@ namespace:
 
 image:
   repository: ghcr.io/cloudsteak/evolvia-verify-lab
-  tag: "latest"
+  tag: "bc6f84a"
   pullPolicy: IfNotPresent
 
 service:
