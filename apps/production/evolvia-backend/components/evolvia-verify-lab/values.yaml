@@ -1,0 +1,18 @@
+namespace:
+  name: evolvia-backend-prod
+
+image:
+  repository: ghcr.io/cloudsteak/evolvia-verify-lab
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+config:
+  LOG_LEVEL: INFO
+
+imagePullSecrets:
+  enabled: true
+  name: ghcr-auth
