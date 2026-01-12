@@ -19,7 +19,7 @@ spec:
   sources:
     - repoURL: ghcr.io/cloudsteak/charts
       chart: evolvia-verify-lab
-      targetRevision: 0.1.0
+      targetRevision: 0.1.1
       helm:
         valueFiles:
           - $values/apps/production/evolvia-backend/components/evolvia-verify-lab/values.yaml
