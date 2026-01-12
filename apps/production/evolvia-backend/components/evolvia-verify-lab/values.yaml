@@ -1,6 +1,13 @@
 namespace:
   name: evolvia-backend-prod
 
+image:
+  repository: ghcr.io/cloudsteak/evolvia-verify-lab
+  tag: "0.0.1"
+  pullPolicy: IfNotPresent
+
+replicaCount: 2
+
 service:
   type: ClusterIP
   port: 8000
