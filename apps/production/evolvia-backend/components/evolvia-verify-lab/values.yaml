@@ -11,3 +11,6 @@ config:
 imagePullSecrets:
   enabled: true
   name: ghcr-auth
+
+probes:
+  periodSeconds: 10
