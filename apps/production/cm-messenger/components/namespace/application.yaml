@@ -5,6 +5,9 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    environment: production
+    type: namespace
 spec:
   project: cloudmentor
   destination:
