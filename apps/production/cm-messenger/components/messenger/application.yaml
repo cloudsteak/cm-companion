@@ -5,6 +5,11 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+  labels:
+    environment: production
+    app: cm-messenger
+    component: messenger
+    type: application
 spec:
   project: cloudmentor
   destination:
