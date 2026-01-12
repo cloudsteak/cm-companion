@@ -8,6 +8,7 @@ metadata:
   labels:
     environment: production
     type: namespace
+    app: cm-messenger
 spec:
   project: cloudmentor
   destination:
