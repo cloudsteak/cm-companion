@@ -12,16 +12,16 @@ service:
   type: ClusterIP
   port: 8000
 
-configmap:
+config:
   LOG_LEVEL: "INFO"
   EMAIL_SENDER: "noreply@evolvia.hu"
   EMAIL_SENDER_NAME: "Evolvia"
   PORTAL_AZURE_URL: "https://portal.azure.com"
   PORTAL_AWS_URL: "https://console.aws.amazon.com"
 
-# Keep internal API key disabled (no auth)
-secretInternal:
-  enabled: false
+# Secret names (created by ESO, referenced by Deployment)
+secrets:
+  appSecretName: "cm-messenger-credentials"
 
 # GHCR image pull auth
 imagePullSecrets:
