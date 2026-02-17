@@ -19,7 +19,7 @@ spec:
   sources:
     - repoURL: ghcr.io/cloudsteak/charts
       chart: cm-messenger
-      targetRevision: 0.1.1
+      targetRevision: 0.2.0
       helm:
         valueFiles:
           - $values/apps/production/cm-messenger/components/messenger/values.yaml
