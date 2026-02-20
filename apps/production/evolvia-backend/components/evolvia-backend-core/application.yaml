@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: evolvia-backend-core-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    environment: production
+    app: evolvia-backend
+    component: backend-core
+    type: application
+spec:
+  project: cloudmentor
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: evolvia-backend-prod
+
+  sources:
+    - repoURL: ghcr.io/cloudsteak/charts
+      chart: evolvia-backend-core
+      targetRevision: 0.3.1
+      helm:
+        valueFiles:
+          - $values/apps/production/evolvia-backend/components/evolvia-backend-core/values.yaml
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
