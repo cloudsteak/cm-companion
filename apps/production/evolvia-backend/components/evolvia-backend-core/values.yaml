@@ -127,5 +127,5 @@ resources:
 probes:
   enabled: true
   path: /
-  initialDelaySeconds: 10
+  initialDelaySeconds: 15
   periodSeconds: 15
