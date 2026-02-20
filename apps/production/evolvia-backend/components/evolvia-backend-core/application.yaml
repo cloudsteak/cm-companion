@@ -19,7 +19,7 @@ spec:
   sources:
     - repoURL: ghcr.io/cloudsteak/charts
       chart: evolvia-backend-core
-      targetRevision: 0.3.1
+      targetRevision: 0.3.2
       helm:
         valueFiles:
           - $values/apps/production/evolvia-backend/components/evolvia-backend-core/values.yaml
