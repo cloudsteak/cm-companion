@@ -1,0 +1,131 @@
+###############################
+# Cloud Mentor Evolvia Helm Chart Values - Backend Core Service
+###############################
+
+# Replica count for the Deployment
+# Defines how many Evolvia backend-core pods will be deployed.
+replicaCount: 1
+
+# Docker image settings
+# Defines the container image repository and pull policy.
+# - repository: source of the Evolvia backend-core  image
+# - pullPolicy: determines when Kubernetes pulls the image (IfNotPresent, Always, or Never)
+# - tag: the specific version of the Evolvia backend-core image to use. Example: "0.1.0".
+# - pullSecretName: name of the imagePullSecret for private registry access (if needed)
+image:
+  repository: "ghcr.io/cloudsteak/evolvia/backend"
+  tag: "0.2.0"
+  pullPolicy: IfNotPresent
+  pullSecretName: "ghcr-auth"
+
+# Kubernetes Service configuration
+service:
+  type: ClusterIP
+  port: 8000
+
+# Secret names (created by ESO, referenced by Deployment)
+# These secrets are populated by External Secrets Operator (ESO)
+# The actual values are stored in AWS (Secrets Manager and Parameter Store)
+secrets:
+  # Kubernetes Secret name for sensitive credentials
+  # Source: AWS Secrets Manager (/prod/app/evolvia-backend-core/credentials)
+  # Created/managed by: ExternalSecret resource (via ArgoCD Wave 1)
+  appSecretName: "evolvia-backend-core-credentials"
+
+  # Kubernetes Secret name for non-sensitive configuration
+  # Source: AWS Parameter Store (/prod/app/evolvia-backend-core/config)
+  # Created/managed by: ExternalSecret resource (via ArgoCD Wave 1)
+  configSecretName: "evolvia-backend-core-config"
+
+# Environment variables mapping
+# Explicit declaration of all environment variables required by the application
+# Maps env var names to their sources in the nested Secret/Config structures
+env:
+  # Sensitive credentials from AWS Secrets Manager (nested JSON)
+  # Path: /prod/app/evolvia-backend-core/credentials
+  credentials:
+    - name: AUTH0_DOMAIN
+      jsonPath: "auth0.domain"
+      description: "Auth0 tenant domain"
+    - name: AUTH0_AUDIENCE
+      jsonPath: "auth0.audience"
+      description: "Auth0 API audience identifier"
+    - name: GITHUB_TOKEN
+      jsonPath: "github.token"
+      description: "GitHub personal access token for workflow triggers"
+    - name: WORDPRESS_SECRET_KEY
+      jsonPath: "wordpress.secret_key"
+      description: "WordPress webhook signature secret"
+    - name: INTERNAL_SECRET
+      jsonPath: "security.internal_secret"
+      description: "Internal service authentication secret"
+    - name: INTERNAL_MESSENGER_API_KEY
+      jsonPath: "security.internal_messenger_api_key"
+      description: "API key for messenger service internal communication"
+    - name: INTERNAL_VERIFY_API_KEY
+      jsonPath: "security.internal_verify_api_key"
+      description: "API key for verify lab service internal communication"
+
+  # Non-sensitive configuration from AWS Parameter Store (nested JSON)
+  # Path: /prod/app/evolvia-backend-core/config
+  config:
+    - name: LOG_LEVEL
+      jsonPath: "logging.level"
+      description: "Application logging level (DEBUG, INFO, WARNING, ERROR)"
+    - name: REDIS_HOST
+      jsonPath: "redis.host"
+      description: "Redis server hostname"
+    - name: REDIS_PORT
+      jsonPath: "redis.port"
+      description: "Redis server port"
+    - name: REDIS_DB
+      jsonPath: "redis.db"
+      description: "Redis database number"
+    - name: AUTH0_ALGORITHMS
+      jsonPath: "auth0.algorithms"
+      description: "JWT signature algorithms for Auth0 validation"
+    - name: GITHUB_REPO
+      jsonPath: "github.repo"
+      description: "GitHub repository for workflow triggers (owner/repo)"
+    - name: GITHUB_WORKFLOW_FILENAME
+      jsonPath: "github.workflow_filename"
+      description: "GitHub Actions workflow filename to trigger"
+    - name: WORDPRESS_WEBHOOK_URL
+      jsonPath: "wordpress.webhook_url"
+      description: "WordPress webhook endpoint URL"
+    - name: MESSENGER_HOST
+      jsonPath: "messenger.host"
+      description: "Messenger service hostname"
+    - name: MESSENGER_PATH
+      jsonPath: "messenger.path"
+      description: "Messenger service API endpoint path"
+    - name: MESSENGER_TEMPLATE
+      jsonPath: "messenger.template"
+      description: "Email/message template name"
+    - name: VERIFY_LAB_HOST
+      jsonPath: "verify_lab.host"
+      description: "Verify Lab service hostname"
+    - name: VERIFY_LAB_PATH
+      jsonPath: "verify_lab.path"
+      description: "Verify Lab service API endpoint path"
+
+# Container resources
+# - requests: guaranteed minimum resources
+# - limits: maximum resources allowed
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+# Health probes
+# - path: HTTP endpoint for health checks
+# - initialDelaySeconds: wait time before first probe
+# - periodSeconds: how often to perform the probe
+probes:
+  enabled: true
+  path: /
+  initialDelaySeconds: 15
+  periodSeconds: 15
