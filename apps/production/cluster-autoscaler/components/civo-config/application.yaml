@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-autoscaler-civo-config
+  namespace: argocd
+  labels:
+    environment: production
+    app: cluster-autoscaler
+    type: config
+spec:
+  project: cloudmentor
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+
+  source:
+    repoURL: https://github.com/cloudsteak/cm-companion
+    targetRevision: main
+    path: apps/production/cluster-autoscaler/components/civo-config/manifests
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

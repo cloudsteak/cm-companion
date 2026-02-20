@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+  labels:
+    app: cluster-autoscaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cluster-autoscaler
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "8085"
+        prometheus.io/scrape: "true"
+      labels:
+        app: cluster-autoscaler
+    spec:
+      containers:
+        - name: cluster-autoscaler
+          image: registry.k8s.io/autoscaling/cluster-autoscaler:v1.28.1
+          imagePullPolicy: Always
+          command:
+            - ./cluster-autoscaler
+            - --v=4
+            - --stderrthreshold=info
+            - --cloud-provider=civo
+            - --nodes=2:5:thor
+            - --feature-gates=SidecarContainers=true
+            - --skip-nodes-with-local-storage=false
+            - --skip-nodes-with-system-pods=false
+          env:
+            - name: CIVO_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: civo-api-access
+                  key: api-url
+            - name: CIVO_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: civo-api-access
+                  key: api-key
+            - name: CIVO_CLUSTER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: civo-api-access
+                  key: cluster-id
+            - name: CIVO_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: civo-api-access
+                  key: region
+          resources:
+            limits:
+              cpu: 100m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
+      priorityClassName: system-cluster-critical
+      serviceAccountName: cluster-autoscaler
