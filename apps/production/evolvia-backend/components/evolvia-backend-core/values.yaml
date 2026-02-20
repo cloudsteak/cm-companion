@@ -32,10 +32,14 @@ secrets:
   # Created/managed by: ExternalSecret resource (via ArgoCD Wave 1)
   appSecretName: "evolvia-backend-core-credentials"
 
-  # Kubernetes Secret name for non-sensitive configuration
-  # Source: AWS Parameter Store (/prod/app/evolvia-backend-core/config)
-  # Created/managed by: ExternalSecret resource (via ArgoCD Wave 1)
+  # Legacy fallback only for config map reference name.
+  # Prefer using configMap.name below.
   configSecretName: "evolvia-backend-core-config"
+
+# Kubernetes ConfigMap reference for non-sensitive configuration
+# Source: AWS Parameter Store (/prod/app/evolvia-backend-core/config)
+configMap:
+  name: "evolvia-backend-core-config"
 
 # Environment variables mapping
 # Explicit declaration of all environment variables required by the application
@@ -127,5 +131,5 @@ resources:
 probes:
   enabled: true
   path: /
-  initialDelaySeconds: 15
+  initialDelaySeconds: 10
   periodSeconds: 15

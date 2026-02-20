@@ -3,4 +3,5 @@ kind: Namespace
 metadata:
   name: evolvia-backend-prod
   labels:
+    cloudsteak.io/ghcr-auth: "true"
     istio-injection: enabled
