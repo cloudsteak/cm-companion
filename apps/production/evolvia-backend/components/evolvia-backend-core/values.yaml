@@ -32,14 +32,15 @@ secrets:
   # Created/managed by: ExternalSecret resource (via ArgoCD Wave 1)
   appSecretName: "evolvia-backend-core-credentials"
 
-  # Legacy fallback only for config map reference name.
-  # Prefer using configMap.name below.
+  # Non-sensitive configuration secret name
+  # Source: AWS Parameter Store (/prod/app/evolvia-backend-core/config)
+  # Created/managed by: ExternalSecret resource (backend-config.yaml)
   configSecretName: "evolvia-backend-core-config"
 
 # Kubernetes ConfigMap reference for non-sensitive configuration
-# Source: AWS Parameter Store (/prod/app/evolvia-backend-core/config)
+# Disabled when ESO/ExternalSecret is used for config.
 configMap:
-  name: "evolvia-backend-core-config"
+  name: ""
 
 # Environment variables mapping
 # Explicit declaration of all environment variables required by the application

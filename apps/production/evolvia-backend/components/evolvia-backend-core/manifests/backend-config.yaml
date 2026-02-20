@@ -1,19 +1,65 @@
-apiVersion: v1
-kind: ConfigMap
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
 metadata:
   name: evolvia-backend-core-config
   namespace: evolvia-backend-prod
-data:
-  LOG_LEVEL: ""
-  REDIS_HOST: ""
-  REDIS_PORT: ""
-  REDIS_DB: ""
-  AUTH0_ALGORITHMS: ""
-  GITHUB_REPO: ""
-  GITHUB_WORKFLOW_FILENAME: ""
-  WORDPRESS_WEBHOOK_URL: ""
-  MESSENGER_HOST: ""
-  MESSENGER_PATH: ""
-  MESSENGER_TEMPLATE: ""
-  VERIFY_LAB_HOST: ""
-  VERIFY_LAB_PATH: ""
+spec:
+  refreshInterval: 24h
+  secretStoreRef:
+    name: aws-parameter-store
+    kind: ClusterSecretStore
+  target:
+    name: evolvia-backend-core-config
+  data:
+    - secretKey: LOG_LEVEL
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: logging.level
+    - secretKey: REDIS_HOST
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: redis.host
+    - secretKey: REDIS_PORT
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: redis.port
+    - secretKey: REDIS_DB
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: redis.db
+    - secretKey: AUTH0_ALGORITHMS
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: auth0.algorithms
+    - secretKey: GITHUB_REPO
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: github.repo
+    - secretKey: GITHUB_WORKFLOW_FILENAME
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: github.workflow_filename
+    - secretKey: WORDPRESS_WEBHOOK_URL
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: wordpress.webhook_url
+    - secretKey: MESSENGER_HOST
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: messenger.host
+    - secretKey: MESSENGER_PATH
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: messenger.path
+    - secretKey: MESSENGER_TEMPLATE
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: messenger.template
+    - secretKey: VERIFY_LAB_HOST
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: verify_lab.host
+    - secretKey: VERIFY_LAB_PATH
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: verify_lab.path
