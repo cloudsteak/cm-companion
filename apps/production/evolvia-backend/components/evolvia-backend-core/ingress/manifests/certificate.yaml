@@ -15,4 +15,4 @@ spec:
     name: letsencrypt-dns01
     kind: ClusterIssuer
   dnsNames:
-  - "evolvia.api.cloud-mentor.hu"
+    - "evolvia.api.cloud-mentor.hu"
