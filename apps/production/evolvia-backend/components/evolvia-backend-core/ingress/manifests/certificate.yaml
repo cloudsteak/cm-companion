@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: evolvia-backend-core-cert
+  namespace: evolvia-backend-prod
+spec:
+  secretName: evolvia-backend-core-app-tls
+  issuerRef:
+    name: letsencrypt-dns01
+    kind: ClusterIssuer
+  dnsNames:
+  - "evolvia.api.cloud-mentor.hu"

@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: evolvia-backend-core-gateway
+  namespace: evolvia-backend-prod
+spec:
+  selector:
+    istio: ingress
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "evolvia.api.cloud-mentor.hu"
+    tls:
+      httpsRedirect: true
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "evolvia.api.cloud-mentor.hu"
+    tls:
+      mode: SIMPLE
+      credentialName: evolvia-backend-core-app-tls
