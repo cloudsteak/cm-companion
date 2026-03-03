@@ -3,6 +3,12 @@ kind: VirtualService
 metadata:
   name: evolvia-backend-core-vs
   namespace: evolvia-backend-prod
+  labels:
+    environment: production
+    app: evolvia-backend
+    component: backend-core
+    type: ingress
+    managed-by: argocd
   annotations:
     external-dns.alpha.kubernetes.io/hostname: "evolvia.api.cloud-mentor.hu"
 spec:

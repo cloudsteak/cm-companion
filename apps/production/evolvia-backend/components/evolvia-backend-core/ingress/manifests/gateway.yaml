@@ -3,6 +3,12 @@ kind: Gateway
 metadata:
   name: evolvia-backend-core-gateway
   namespace: evolvia-backend-prod
+  labels:
+    environment: production
+    app: evolvia-backend
+    component: backend-core
+    type: ingress
+    managed-by: argocd
 spec:
   selector:
     istio: ingress
