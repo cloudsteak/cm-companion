@@ -9,6 +9,9 @@ metadata:
     component: backend-core
     type: ingress
     managed-by: argocd
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: "evolvia.api.cloud-mentor.hu"
+    external-dns.alpha.kubernetes.io/ttl: "7200"
 spec:
   selector:
     istio: ingress
