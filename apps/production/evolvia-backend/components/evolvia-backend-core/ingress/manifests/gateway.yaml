@@ -12,7 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "evolvia.api.cloud-mentor.hu"
+      - "evolvia.api.cloud-mentor.hu"
     tls:
       httpsRedirect: true
   - port:
@@ -20,7 +20,7 @@ spec:
       name: https
       protocol: HTTPS
     hosts:
-    - "evolvia.api.cloud-mentor.hu"
+      - "evolvia.api.cloud-mentor.hu"
     tls:
       mode: SIMPLE
       credentialName: evolvia-backend-core-app-tls
