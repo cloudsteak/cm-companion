@@ -4,7 +4,7 @@ This repository contains the configuration and deployment manifests for the Clou
 
 ## Overview
 
-The `cm-companion` project uses an "App of Apps" pattern to manage infrastructure and application components across different environments (production, staging). It integrates with AWS Secrets Manager and Parameter Store using the External Secrets Operator (ESO) for secure secret management.
+The `cm-companion` project uses an "App of Apps" pattern to manage infrastructure and application components. Currently, it focuses on the **production** environment. It integrates with AWS Secrets Manager and Parameter Store using the External Secrets Operator (ESO) for secure secret management.
 
 ## Applications
 
@@ -32,12 +32,10 @@ Manages the automatic scaling of Kubernetes nodes.
 ```
 .
 ├── apps/
-│   ├── production/
-│   │   ├── cluster-autoscaler/
-│   │   ├── cm-messenger/
-│   │   └── evolvia-backend/    <-- Main application suite
-│   └── staging/
-│       └── http/               <-- Staging environment (HTTP services)
+│   └── production/             <-- Active production environment
+│       ├── cluster-autoscaler/
+│       ├── cm-messenger/
+│       └── evolvia-backend/    <-- Main application suite
 └── .github/
     └── workflows/              <-- CI/CD workflows (linting, version checks)
 ```
