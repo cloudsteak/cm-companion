@@ -11,7 +11,7 @@ image:
 
 # Pod annotations
 podAnnotations:
-  proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+  sidecar.istio.io/inject: "false"
 
 # Full name override to ensure consistent naming
 fullnameOverride: "evolvia-cleanup-trigger"
