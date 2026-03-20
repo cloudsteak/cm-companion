@@ -1,0 +1,47 @@
+###############################
+# Cloud Mentor Evolvia Helm Chart Values - Backend Cleanup Trigger Job
+###############################
+
+# Docker image settings
+image:
+  repository: ghcr.io/cloudsteak/evolvia/cleanup-trigger
+  tag: "0.2.1"
+  pullPolicy: IfNotPresent
+  pullSecretName: "ghcr-auth"
+
+# Full name override to ensure consistent naming
+fullnameOverride: "evolvia-cleanup-trigger"
+
+# CronJob configuration
+cronjob:
+  schedule: "*/15 * * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
+  restartPolicy: OnFailure
+  startingDeadlineSeconds: 300
+  activeDeadlineSeconds: 300
+
+# Secret names (created by ESO, referenced by Job)
+secrets:
+  appSecretName: "evolvia-backend-cleanup-trigger-credentials"
+  configSecretName: "evolvia-backend-cleanup-trigger-config"
+
+# Environment variables mapping
+env:
+  credentials:
+    - name: INTERNAL_SECRET
+      jsonPath: "security.internal_secret"
+      description: "Internal service authentication secret for backend API calls"
+    - name: BACKEND_URL
+      jsonPath: "api.backend_url"
+      description: "Full FQDN of the Evolvia backend core service API"
+
+# Container resources
+resources:
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
