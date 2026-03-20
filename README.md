@@ -15,7 +15,7 @@ The core backend infrastructure for the Evolvia platform.
 - **`evolvia-verify-lab`**: Service for verifying laboratory data.
 - **`redis`**: In-cluster Redis instance for caching and session management.
 - **`shared-secrets`**: Management of platform-wide credentials (e.g., GHCR auth).
-- **`namespace`**: Defines the `evolvia-backend-prod` and `cronjobs` namespaces.
+- **`namespace`**: Defines the `evolvia-backend-prod` and `evolvia-backend-cronjobs-prod` namespaces.
 
 ### CM-Messenger (Production)
 A dedicated service for handling platform communications and notifications.

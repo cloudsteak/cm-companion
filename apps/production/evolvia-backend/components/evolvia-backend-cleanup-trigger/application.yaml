@@ -14,7 +14,7 @@ spec:
   project: cloudmentor
   destination:
     server: https://kubernetes.default.svc
-    namespace: cronjobs
+    namespace: evolvia-backend-cronjobs-prod
 
   sources:
     - repoURL: ghcr.io/cloudsteak/charts

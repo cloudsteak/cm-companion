@@ -9,7 +9,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cronjobs
+  name: evolvia-backend-cronjobs-prod
   labels:
     cloudsteak.io/ghcr-auth: "true"
     istio-injection: enabled
