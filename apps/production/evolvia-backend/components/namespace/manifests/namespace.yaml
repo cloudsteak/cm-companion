@@ -9,7 +9,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cron-jobs
+  name: cronjobs
   labels:
     cloudsteak.io/ghcr-auth: "true"
     istio-injection: enabled

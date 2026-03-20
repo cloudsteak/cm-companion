@@ -14,7 +14,7 @@ spec:
   project: cloudmentor
   destination:
     server: https://kubernetes.default.svc
-    namespace: cron-jobs
+    namespace: cronjobs
 
   sources:
     - repoURL: ghcr.io/cloudsteak/charts
@@ -31,3 +31,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
