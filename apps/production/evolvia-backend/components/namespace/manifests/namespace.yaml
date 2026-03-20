@@ -12,3 +12,4 @@ metadata:
   name: cron-jobs
   labels:
     cloudsteak.io/ghcr-auth: "true"
+    istio-injection: enabled
