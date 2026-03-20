@@ -5,3 +5,11 @@ metadata:
   labels:
     cloudsteak.io/ghcr-auth: "true"
     istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: evolvia-backend-cronjobs-prod
+  labels:
+    cloudsteak.io/ghcr-auth: "true"
+    istio-injection: enabled
