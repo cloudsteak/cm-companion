@@ -9,6 +9,10 @@ image:
   pullPolicy: IfNotPresent
   pullSecretName: "ghcr-auth"
 
+# Pod annotations
+podAnnotations:
+  proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+
 # Full name override to ensure consistent naming
 fullnameOverride: "evolvia-cleanup-trigger"
 
