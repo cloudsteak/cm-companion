@@ -53,3 +53,4 @@ Components use **Sync Waves** to ensure a correct deployment order:
 1.  **Wave -1**: Namespaces.
 2.  **Wave 0**: Secrets and configuration.
 3.  **Wave 1**: Main application services (Deployments, CronJobs).
+4.  **Wave 2**: Ingress and networking components (e.g., `evolvia-backend-core-ingress`, VirtualServices, Gateways).
