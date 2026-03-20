@@ -29,7 +29,7 @@ cronjob:
 # Secret names (created by ESO, referenced by Job)
 secrets:
   appSecretName: "evolvia-backend-cleanup-trigger-credentials"
-  configSecretName: "evolvia-backend-cleanup-trigger-config"
+  configSecretName: ""
 
 # Environment variables mapping
 env:
