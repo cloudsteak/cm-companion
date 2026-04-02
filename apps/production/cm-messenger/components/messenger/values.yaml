@@ -17,7 +17,7 @@ config:
   EMAIL_SENDER: "noreply@evolvia.hu"
   EMAIL_SENDER_NAME: "Evolvia"
   PORTAL_AZURE_URL: "https://portal.azure.com"
-  PORTAL_AWS_URL: "https://console.aws.amazon.com"
+  PORTAL_AWS_URL: "https://evolvia.signin.aws.amazon.com/console"
 
 # Secret names (created by ESO, referenced by Deployment)
 secrets:
