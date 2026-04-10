@@ -10,11 +10,11 @@ replicaCount: 1
 # Defines the container image repository and pull policy.
 # - repository: source of the Evolvia backend-core  image
 # - pullPolicy: determines when Kubernetes pulls the image (IfNotPresent, Always, or Never)
-# - tag: the specific version of the Evolvia backend-core image to use. Example: "0.1.0".
+# - tag: the specific version of the Evolvia backend-core image to use. Example: "1.0.0".
 # - pullSecretName: name of the imagePullSecret for private registry access (if needed)
 image:
   repository: "ghcr.io/cloudsteak/evolvia/backend"
-  tag: "0.2.1"
+  tag: "1.0.0"
   pullPolicy: IfNotPresent
   pullSecretName: "ghcr-auth"
 
@@ -67,9 +67,15 @@ env:
     - name: INTERNAL_MESSENGER_API_KEY
       jsonPath: "security.internal_messenger_api_key"
       description: "API key for messenger service internal communication"
-    - name: INTERNAL_VERIFY_API_KEY
-      jsonPath: "security.internal_verify_api_key"
-      description: "API key for verify lab service internal communication"
+    - name: INTERNAL_VERIFY_AZURE_API_KEY
+      jsonPath: "security.internal_verify_azure_api_key"
+      description: "API key for Azure verify lab service internal communication"
+    - name: INTERNAL_VERIFY_AWS_API_KEY
+      jsonPath: "security.internal_verify_aws_api_key"
+      description: "API key for AWS verify lab service internal communication"
+    - name: INTERNAL_VERIFY_GCP_API_KEY
+      jsonPath: "security.internal_verify_gcp_api_key"
+      description: "API key for GCP verify lab service internal communication"
 
   # Non-sensitive configuration from AWS Parameter Store (nested JSON)
   # Path: /prod/app/evolvia-backend-core/config
@@ -107,12 +113,24 @@ env:
     - name: MESSENGER_TEMPLATE
       jsonPath: "messenger.template"
       description: "Email/message template name"
-    - name: VERIFY_LAB_HOST
-      jsonPath: "verify_lab.host"
-      description: "Verify Lab service hostname"
-    - name: VERIFY_LAB_PATH
-      jsonPath: "verify_lab.path"
-      description: "Verify Lab service API endpoint path"
+    - name: VERIFY_LAB_AZURE_HOST
+      jsonPath: "verify_lab.azure.host"
+      description: "Azure Verify Lab service hostname"
+    - name: VERIFY_LAB_AZURE_PATH
+      jsonPath: "verify_lab.azure.path"
+      description: "Azure Verify Lab service API endpoint path"
+    - name: VERIFY_LAB_AWS_HOST
+      jsonPath: "verify_lab.aws.host"
+      description: "AWS Verify Lab service hostname"
+    - name: VERIFY_LAB_AWS_PATH
+      jsonPath: "verify_lab.aws.path"
+      description: "AWS Verify Lab service API endpoint path"
+    - name: VERIFY_LAB_GCP_HOST
+      jsonPath: "verify_lab.gcp.host"
+      description: "GCP Verify Lab service hostname"
+    - name: VERIFY_LAB_GCP_PATH
+      jsonPath: "verify_lab.gcp.path"
+      description: "GCP Verify Lab service API endpoint path"
 
 # Container resources
 # - requests: guaranteed minimum resources
