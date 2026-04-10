@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: evolvia-verify-lab-app
+  name: evolvia-verify-lab-azure-app
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
   labels:
     environment: production
-    app: evolvia-verify-lab
-    component: verify-lab
+    app: evolvia-verify-lab-azure
+    component: verify-lab-azure
     type: application
 spec:
   project: cloudmentor
@@ -18,11 +18,11 @@ spec:
 
   sources:
     - repoURL: ghcr.io/cloudsteak/charts
-      chart: evolvia-verify-lab
-      targetRevision: 0.1.1
+      chart: evolvia-verify-lab-azure
+      targetRevision: 1.0.0
       helm:
         valueFiles:
-          - $values/apps/production/evolvia-backend/components/evolvia-verify-lab/values.yaml
+          - $values/apps/production/evolvia-backend/components/evolvia-verify-lab-azure/values.yaml
     - repoURL: https://github.com/cloudsteak/cm-companion
       targetRevision: main
       ref: values

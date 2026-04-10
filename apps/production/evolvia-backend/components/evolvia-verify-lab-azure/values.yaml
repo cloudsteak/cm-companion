@@ -2,8 +2,8 @@ namespace:
   name: evolvia-backend-prod
 
 image:
-  repository: ghcr.io/cloudsteak/evolvia-verify-lab
-  tag: "0.0.1"
+  repository: ghcr.io/cloudsteak/evolvia-verify-lab-azure
+  tag: "0.1.0"
   pullPolicy: IfNotPresent
 
 replicaCount: 1
@@ -13,6 +13,7 @@ service:
   port: 8000
 
 config:
+  PROVIDER: azure
   LOG_LEVEL: INFO
 
 imagePullSecrets:
