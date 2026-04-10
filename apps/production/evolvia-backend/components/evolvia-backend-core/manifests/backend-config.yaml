@@ -55,11 +55,27 @@ spec:
       remoteRef:
         key: /prod/app/evolvia-backend-core/config
         property: messenger.template
-    - secretKey: VERIFY_LAB_HOST
+    - secretKey: VERIFY_LAB_AZURE_HOST
       remoteRef:
         key: /prod/app/evolvia-backend-core/config
-        property: verify_lab.host
-    - secretKey: VERIFY_LAB_PATH
+        property: verify_lab.azure.host
+    - secretKey: VERIFY_LAB_AZURE_PATH
       remoteRef:
         key: /prod/app/evolvia-backend-core/config
-        property: verify_lab.path
+        property: verify_lab.azure.path
+    - secretKey: VERIFY_LAB_AWS_HOST
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: verify_lab.aws.host
+    - secretKey: VERIFY_LAB_AWS_PATH
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: verify_lab.aws.path
+    - secretKey: VERIFY_LAB_GCP_HOST
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: verify_lab.gcp.host
+    - secretKey: VERIFY_LAB_GCP_PATH
+      remoteRef:
+        key: /prod/app/evolvia-backend-core/config
+        property: verify_lab.gcp.path
