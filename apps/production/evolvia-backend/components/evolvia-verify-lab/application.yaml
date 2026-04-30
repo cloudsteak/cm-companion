@@ -8,6 +8,7 @@ metadata:
   labels:
     environment: production
     app: evolvia-verify-lab
+    group: evolvia-verify-labs
     component: verify-lab
     type: application
 spec:
