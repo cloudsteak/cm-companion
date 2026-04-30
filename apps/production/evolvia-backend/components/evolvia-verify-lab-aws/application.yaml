@@ -26,6 +26,9 @@ spec:
     - repoURL: https://github.com/cloudsteak/cm-companion
       targetRevision: main
       ref: values
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      path: apps/production/evolvia-backend/components/evolvia-verify-lab-aws/manifests
 
   syncPolicy:
     automated:
