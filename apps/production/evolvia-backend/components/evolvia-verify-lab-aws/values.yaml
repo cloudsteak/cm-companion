@@ -3,7 +3,7 @@ namespace:
 
 image:
   repository: ghcr.io/cloudsteak/evolvia-verify-lab-aws
-  tag: "2501c18"
+  tag: "05469fc"
   pullPolicy: IfNotPresent
 
 replicaCount: 1
