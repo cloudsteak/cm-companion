@@ -8,6 +8,7 @@ metadata:
   labels:
     environment: production
     app: evolvia-verify-lab-gcp
+    group: evolvia-verify-labs
     component: verify-lab-gcp
     type: application
 spec:
@@ -26,6 +27,9 @@ spec:
     - repoURL: https://github.com/cloudsteak/cm-companion
       targetRevision: main
       ref: values
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      path: apps/production/evolvia-backend/components/evolvia-verify-lab-gcp/manifests
 
   syncPolicy:
     automated:
