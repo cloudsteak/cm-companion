@@ -1,0 +1,32 @@
+db:
+  type: postgresdb
+  postgresdb:
+    host: n8n-prod-postgres-postgresql.n8n-prod.svc.cluster.local
+    port: 5432
+    database: n8n-prod
+    user: automation-master
+
+n8n:
+  encryption_key:
+    valueFrom:
+      secretKeyRef:
+        name: n8n-prod-secrets
+        key: N8N_ENCRYPTION_KEY
+
+extraEnvVars:
+  - name: DB_POSTGRESDB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: n8n-prod-secrets
+        key: DB_POSTGRESDB_PASSWORD
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 500m
+    memory: 768Mi
+
+ingress:
+  enabled: false

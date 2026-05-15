@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n-automation-postgres
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    environment: production
+    app: n8n-automation
+    component: postgres
+    type: database
+spec:
+  project: cloudmentor
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: n8n-prod
+  sources:
+    - repoURL: oci://ghcr.io/cloudpirates-io/helm-charts
+      chart: postgres
+      targetRevision: "0.19.4"
+      helm:
+        valueFiles:
+          - $values/apps/production/n8n-automation/components/postgres/values.yaml
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      ref: values
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
