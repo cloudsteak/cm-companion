@@ -17,19 +17,10 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n-prod
-  sources:
-    - repoURL: oci://8gears.container-registry.com/library/n8n
-      chart: n8n
-      targetRevision: "2.0.1"
-      helm:
-        valueFiles:
-          - $values/apps/production/n8n-automation/components/n8n/values.yaml
-    - repoURL: https://github.com/cloudsteak/cm-companion
-      targetRevision: main
-      ref: values
-    - repoURL: https://github.com/cloudsteak/cm-companion
-      targetRevision: main
-      path: apps/production/n8n-automation/components/n8n/manifests
+  source:
+    repoURL: https://github.com/cloudsteak/cm-companion
+    targetRevision: main
+    path: apps/production/n8n-automation/components/n8n/manifests
   syncPolicy:
     automated:
       prune: true
