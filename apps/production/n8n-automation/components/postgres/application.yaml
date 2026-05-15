@@ -17,16 +17,10 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n-prod
-  sources:
-    - repoURL: oci://registry-1.docker.io/cloudpirates
-      chart: postgres
-      targetRevision: "0.19.4"
-      helm:
-        valueFiles:
-          - $values/apps/production/n8n-automation/components/postgres/values.yaml
-    - repoURL: https://github.com/cloudsteak/cm-companion
-      targetRevision: main
-      ref: values
+  source:
+    repoURL: https://github.com/cloudsteak/cm-companion
+    targetRevision: main
+    path: apps/production/n8n-automation/components/postgres/manifests
   syncPolicy:
     automated:
       prune: true

@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: n8n-postgres
+  namespace: n8n-prod
+spec:
+  instances: 1
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "128MB"
+
+  bootstrap:
+    initdb:
+      database: n8n-prod
+      owner: automation-master
+      secret:
+        name: n8n-prod-secrets
+
+  storage:
+    size: 1Gi
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi

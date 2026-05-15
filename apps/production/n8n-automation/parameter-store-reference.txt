@@ -4,6 +4,9 @@
 # Parameter Store kulcs:
 /prod/app/n8n/config
 
+# Postgres service hostname (CloudNativePG generálja, nem kell a Parameter Store-ba):
+# n8n-postgres-rw.n8n-prod.svc.cluster.local
+
 # JSON tartalom (String típus):
 # {
 #   "POSTGRES": {
