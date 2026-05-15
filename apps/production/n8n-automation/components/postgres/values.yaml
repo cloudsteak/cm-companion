@@ -1,0 +1,16 @@
+auth:
+  username: automation-master
+  database: n8n-prod
+  existingSecret: n8n-prod-secrets
+  existingSecretPasswordKey: DB_POSTGRESDB_PASSWORD
+
+primary:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+  persistence:
+    size: 1Gi

@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: n8n-prod-gateway
+  namespace: n8n-prod
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: n8n-prod-tls
+      hosts:
+        - n8n.tools.cloud-mentor.hu
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - n8n.tools.cloud-mentor.hu
+      tls:
+        httpsRedirect: true
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: n8n-prod
+  namespace: n8n-prod
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: n8n.tools.cloud-mentor.hu
+    external-dns.alpha.kubernetes.io/ttl: "120"
+spec:
+  hosts:
+    - n8n.tools.cloud-mentor.hu
+  gateways:
+    - n8n-prod-gateway
+  http:
+    - route:
+        - destination:
+            host: n8n-prod.n8n-prod.svc.cluster.local
+            port:
+              number: 5678

@@ -1,0 +1,28 @@
+# n8n-prod – AWS Parameter Store struktúra
+# Egyetlen JSON elem tartalmazza az összes értéket
+
+# Parameter Store kulcs:
+/prod/app/n8n/config
+
+# JSON tartalom (String típus):
+# {
+#   "POSTGRES": {
+#     "DB_PASSWORD": "...",          → erős random jelszó
+#     "DB_USER": "automation-master", → Postgres admin user
+#     "DB_NAME": "n8n-prod"           → adatbázis neve
+#   },
+#   "N8N": {
+#     "ENCRYPTION_KEY": "..."        → minimum 32 karakteres random string (pl: openssl rand -hex 32)
+#   },
+#   "AI": {}                         → GCP Vertex AI autentikáció OIDC/Workload Identity Federationön keresztül, nem API key
+# }
+
+# AWS CLI feltöltés:
+# aws ssm put-parameter \
+#   --name "/prod/app/n8n/config" \
+#   --value '{"POSTGRES":{"DB_PASSWORD":"...","DB_USER":"automation-master","DB_NAME":"n8n-prod"},"N8N":{"ENCRYPTION_KEY":"..."},"AI":{}}' \
+#   --type String \
+#   --region <region>
+
+# ENCRYPTION_KEY generálása:
+# openssl rand -hex 32
