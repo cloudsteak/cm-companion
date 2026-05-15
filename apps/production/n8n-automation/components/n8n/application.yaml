@@ -18,7 +18,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: n8n-prod
   sources:
-    - repoURL: https://8gears.container-registry.com/chartrepo/library
+    - repoURL: oci://8gears.container-registry.com/library
       chart: n8n
       targetRevision: "2.0.1"
       helm:
