@@ -1,21 +1,21 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: n8n-prod-gateway
   namespace: n8n-prod
+  labels:
+    environment: production
+    app: n8n-automation
+    component: n8n
+    type: ingress
+    managed-by: argocd
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: n8n.tools.cloud-mentor.hu
+    external-dns.alpha.kubernetes.io/ttl: "7200"
 spec:
   selector:
-    istio: ingressgateway
+    istio: ingress
   servers:
-    - port:
-        number: 443
-        name: https
-        protocol: HTTPS
-      tls:
-        mode: SIMPLE
-        credentialName: n8n-prod-tls
-      hosts:
-        - n8n.tools.cloud-mentor.hu
     - port:
         number: 80
         name: http
@@ -24,15 +24,30 @@ spec:
         - n8n.tools.cloud-mentor.hu
       tls:
         httpsRedirect: true
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+        - n8n.tools.cloud-mentor.hu
+      tls:
+        mode: SIMPLE
+        credentialName: n8n-prod-tls
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: n8n-prod
   namespace: n8n-prod
+  labels:
+    environment: production
+    app: n8n-automation
+    component: n8n
+    type: ingress
+    managed-by: argocd
   annotations:
     external-dns.alpha.kubernetes.io/hostname: n8n.tools.cloud-mentor.hu
-    external-dns.alpha.kubernetes.io/ttl: "120"
+    external-dns.alpha.kubernetes.io/ttl: "7200"
 spec:
   hosts:
     - n8n.tools.cloud-mentor.hu
@@ -41,6 +56,6 @@ spec:
   http:
     - route:
         - destination:
-            host: n8n-prod.n8n-prod.svc.cluster.local
+            host: n8n-automation-app
             port:
               number: 5678
