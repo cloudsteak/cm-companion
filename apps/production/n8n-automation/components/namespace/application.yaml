@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n-automation-namespace
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    environment: production
+    type: namespace
+    app: n8n-automation
+spec:
+  project: cloudmentor
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  source:
+    repoURL: https://github.com/cloudsteak/cm-companion
+    targetRevision: main
+    path: apps/production/n8n-automation/components/namespace/manifests
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
