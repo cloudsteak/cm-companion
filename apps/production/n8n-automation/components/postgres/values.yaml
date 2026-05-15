@@ -13,4 +13,4 @@ primary:
       cpu: 300m
       memory: 512Mi
   persistence:
-    size: 5Gi
+    size: 1Gi
