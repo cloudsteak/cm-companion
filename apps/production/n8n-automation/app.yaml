@@ -5,6 +5,10 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  labels:
+    environment: production
+    app: n8n-automation
+    type: application-root
 spec:
   project: cloudmentor
   destination:
