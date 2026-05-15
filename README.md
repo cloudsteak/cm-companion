@@ -23,6 +23,12 @@ A dedicated service for handling platform communications and notifications.
 - **`secrets`**: ExternalSecrets for fetching API keys and configuration.
 - **`namespace`**: Defines the `cm-messenger-prod` namespace.
 
+### N8N Automation (Production)
+Workflow automation platform with AI capabilities, accessible at `n8n.tools.cloud-mentor.hu`.
+- **`postgres`**: PostgreSQL database (CloudPirates Helm chart) for n8n workflow data.
+- **`n8n`**: The n8n workflow engine (8gears Helm chart) with Istio ingress and ExternalSecrets.
+- **`namespace`**: Defines the `n8n-prod` namespace.
+
 ### Cluster Autoscaler (Production)
 Manages the automatic scaling of Kubernetes nodes.
 - **`civo-config`**: Configuration specific to the Civo cloud provider for cluster autoscaling.
@@ -35,19 +41,19 @@ Manages the automatic scaling of Kubernetes nodes.
 │   └── production/             <-- Active production environment
 │       ├── cluster-autoscaler/
 │       ├── cm-messenger/
-│       └── evolvia-backend/    <-- Main application suite
+│       ├── evolvia-backend/    <-- Main application suite
+│       └── n8n-automation/    <-- Workflow automation platform
 ```
 
 ## Deployment Pattern
 
 Each application component typically follows this structure:
+- `app.yaml`: Root ArgoCD Application (App of Apps) for the service.
 - `application.yaml`: ArgoCD Application manifest for the component.
 - `values.yaml`: Helm values (if the component uses a Helm chart).
-- `secrets/`: Sub-application for managing ExternalSecrets.
 - `manifests/`: Raw Kubernetes manifests (e.g., VirtualServices, Gateways, ExternalSecrets).
 
 Components use **Sync Waves** to ensure a correct deployment order:
 1.  **Wave -1**: Namespaces.
-2.  **Wave 0**: Secrets and configuration.
-3.  **Wave 1**: Main application services (Deployments, CronJobs).
-4.  **Wave 2**: Ingress and networking components (e.g., `evolvia-backend-core-ingress`, VirtualServices, Gateways).
+2.  **Wave 0**: Databases and dependencies.
+3.  **Wave 1**: Main application services (Deployments, ExternalSecrets, Ingress).
