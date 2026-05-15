@@ -18,7 +18,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: n8n-prod
   sources:
-    - repoURL: oci://ghcr.io/cloudpirates-io/helm-charts
+    - repoURL: oci://registry-1.docker.io/cloudpirates
       chart: postgres
       targetRevision: "0.19.4"
       helm:
