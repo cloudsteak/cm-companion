@@ -58,4 +58,4 @@ spec:
         - destination:
             host: n8n-automation-app
             port:
-              number: 5678
+              number: 80
