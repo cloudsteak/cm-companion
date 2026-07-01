@@ -9,7 +9,7 @@ metadata:
     component: n8n
     managed-by: argocd
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: n8n-automation
