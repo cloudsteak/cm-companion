@@ -19,6 +19,9 @@ spec:
     namespace: cm-messenger-prod
 
   sources:
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      path: apps/production/cm-messenger/components/messenger/manifests
     - repoURL: ghcr.io/cloudsteak/charts
       chart: cm-messenger
       targetRevision: 0.2.0
