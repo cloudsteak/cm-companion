@@ -3,6 +3,8 @@ kind: Certificate
 metadata:
   name: n8n-prod-cert
   namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   labels:
     environment: production
     app: n8n-automation
