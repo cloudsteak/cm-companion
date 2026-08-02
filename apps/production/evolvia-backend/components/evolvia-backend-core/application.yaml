@@ -19,6 +19,9 @@ spec:
     namespace: evolvia-backend-prod
 
   sources:
+    - repoURL: https://github.com/cloudsteak/cm-companion
+      targetRevision: main
+      path: apps/production/evolvia-backend/components/evolvia-backend-core/manifests
     - repoURL: ghcr.io/cloudsteak/charts
       chart: evolvia-backend-core
       targetRevision: 1.0.0
