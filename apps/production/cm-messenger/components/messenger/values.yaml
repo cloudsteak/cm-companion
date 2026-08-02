@@ -19,11 +19,9 @@ config:
   PORTAL_AZURE_URL: "https://portal.azure.com"
   PORTAL_AWS_URL: "https://evolvia.signin.aws.amazon.com/console"
 
-# Secret names (created by ESO, referenced by Deployment)
 secrets:
   appSecretName: "cm-messenger-credentials"
 
-# GHCR image pull auth
 imagePullSecrets:
   enabled: true
   name: ghcr-auth
