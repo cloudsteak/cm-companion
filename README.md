@@ -12,7 +12,6 @@ The `cm-companion` project uses an "App of Apps" pattern to manage infrastructur
 The core backend infrastructure for the Evolvia platform.
 - **`backend-core`**: The main API service.
 - **`backend-cleanup-trigger`**: A scheduled CronJob for maintenance and cleanup tasks.
-- **`evolvia-verify-lab`**: Service for verifying laboratory data.
 - **`redis`**: In-cluster Redis instance for caching and session management.
 - **`shared-secrets`**: Management of platform-wide credentials (e.g., GHCR auth).
 - **`namespace`**: Defines the `evolvia-backend-prod` and `evolvia-backend-cronjobs-prod` namespaces.
